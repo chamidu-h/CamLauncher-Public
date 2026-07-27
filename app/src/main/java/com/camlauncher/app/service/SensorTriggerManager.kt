@@ -6,8 +6,8 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 
 /**
- * [STUB] Proprietary hardware sensor logic is closed-source to prevent unauthorized cloning.
- * This file is a stub to allow the open-source UI repository to compile.
+ * Implementation provided by the closed-source core module.
+ * This class interfaces with the open-core UI layer.
  */
 class SensorTriggerManager(
     context: Context,

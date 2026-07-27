@@ -9,9 +9,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * [STUB] Proprietary background camera capture, Media3 muxing, and advanced recording logic
- * is closed-source to prevent unauthorized cloning.
- * This file is a stub to allow the open-source UI repository to compile.
+ * Implementation provided by the closed-source core module.
+ * This class interfaces with the open-core UI layer.
  */
 class RecordingService : LifecycleService() {
 
