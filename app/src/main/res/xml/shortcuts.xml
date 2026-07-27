@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="start_recording"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_record"
+        android:shortcutShortLabel="@string/shortcut_start_recording_short"
+        android:shortcutLongLabel="@string/shortcut_start_recording_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.camlauncher.app"
+            android:targetClass="com.camlauncher.app.ui.TriggerActivity">
+            <extra android:name="action" android:value="START" />
+        </intent>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="stop_recording"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_stop"
+        android:shortcutShortLabel="@string/shortcut_stop_recording_short"
+        android:shortcutLongLabel="@string/shortcut_stop_recording_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.camlauncher.app"
+            android:targetClass="com.camlauncher.app.ui.TriggerActivity">
+            <extra android:name="action" android:value="STOP" />
+        </intent>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
