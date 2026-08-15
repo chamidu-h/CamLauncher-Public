@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CamLauncher</string>
-    <string name="accessibility_service_description">CamLauncher uses accessibility to detect volume button presses for instant recording triggers. This allows you to start and stop recording without touching the screen.</string>
+    <string name="accessibility_service_description">CamLauncher uses this Accessibility Service solely to detect hardware volume button press combinations when the device is locked, allowing users to trigger emergency hands-free recording. It does not monitor, read, or collect user input, screen content, or personal data.</string>
     <string name="notification_channel_recording">Recording</string>
     <string name="notification_channel_status">Status</string>
     <string name="shortcut_start_recording_short">Start</string>

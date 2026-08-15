@@ -24,6 +24,8 @@ import com.camlauncher.app.data.TriggerType
 import com.camlauncher.app.service.MonitorService
 import com.camlauncher.app.service.RecordingService
 import com.camlauncher.app.service.ChunkRecoveryHelper
+import com.camlauncher.app.data.LicenseManager
+import com.camlauncher.app.ui.screens.ActivationScreen
 import com.camlauncher.app.ui.screens.HomeScreen
 import com.camlauncher.app.ui.screens.OnboardingScreen
 import com.camlauncher.app.ui.screens.SettingsScreen
@@ -150,17 +152,23 @@ fun CamLauncherNavHost(settingsStore: SettingsStore) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current as? MainActivity
 
+    var isActivated by remember { mutableStateOf<Boolean?>(null) }
     var onboardingComplete by remember { mutableStateOf<Boolean?>(null) }
 
-    // Check onboarding status
+    // Check license + onboarding status
     LaunchedEffect(Unit) {
+        isActivated = context?.let { LicenseManager.isActivated(it) } ?: false
         onboardingComplete = settingsStore.onboardingComplete.first()
     }
 
-    // Wait until we know onboarding status
-    if (onboardingComplete == null) return
+    // Wait until we know both statuses
+    if (isActivated == null || onboardingComplete == null) return
 
-    val startDestination = if (onboardingComplete == true) "home" else "onboarding"
+    val startDestination = when {
+        isActivated != true -> "activation"
+        onboardingComplete != true -> "onboarding"
+        else -> "home"
+    }
 
     // Launch side-effect for Navigation
     LaunchedEffect(context, onboardingComplete) {
@@ -240,6 +248,18 @@ fun CamLauncherNavHost(settingsStore: SettingsStore) {
             startDestination = startDestination,
             modifier = Modifier.fillMaxSize().padding(innerPadding)
         ) {
+            composable("activation") {
+                ActivationScreen(
+                    onActivated = {
+                        isActivated = true
+                        val nextRoute = if (onboardingComplete == true) "home" else "onboarding"
+                        navController.navigate(nextRoute) {
+                            popUpTo("activation") { inclusive = true }
+                        }
+                    }
+                )
+            }
+
             composable("onboarding") {
                 OnboardingScreen(
                     onComplete = {

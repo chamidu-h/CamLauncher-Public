@@ -203,6 +203,13 @@ class MonitorService : Service() {
     private fun fireTrigger() {
         val now = System.currentTimeMillis()
         if (now - lastTriggerMs < 3000L) return
+
+        // Engine guard: block triggers if license is not activated
+        if (!com.camlauncher.app.data.LicenseManager.isActivated(this)) {
+            Log.w(TAG, "fireTrigger() blocked — license not activated")
+            return
+        }
+
         lastTriggerMs = now
 
         val currentState = com.camlauncher.app.data.RecordingState.RECORDING

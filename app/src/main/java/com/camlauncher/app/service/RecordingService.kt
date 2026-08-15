@@ -29,8 +29,8 @@ class RecordingService : LifecycleService() {
         private val _stateFlow = MutableStateFlow(RecordingState.STOPPED)
         val stateFlow: StateFlow<RecordingState> = _stateFlow
 
-        private val _currentLensFlow = MutableStateFlow(0)
-        val currentLensFlow: StateFlow<Int> = _currentLensFlow
+        private val _currentLensFlow = MutableStateFlow(androidx.camera.core.CameraSelector.DEFAULT_BACK_CAMERA)
+        val currentLensFlow: StateFlow<androidx.camera.core.CameraSelector> = _currentLensFlow
 
         private val _currentZoomRatioFlow = MutableStateFlow(1.0f)
         val currentZoomRatioFlow: StateFlow<Float> = _currentZoomRatioFlow
@@ -51,7 +51,7 @@ class RecordingService : LifecycleService() {
             // Implementation hidden
         }
 
-        fun attachPreviewView(activity: androidx.activity.ComponentActivity) {
+        fun attachPreviewView(view: PreviewView) {
             // Implementation hidden
         }
 

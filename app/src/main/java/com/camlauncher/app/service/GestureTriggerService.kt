@@ -170,6 +170,13 @@ class GestureTriggerService : AccessibilityService() {
     private fun onTriggerFired() {
         val now = System.currentTimeMillis()
         if (now - lastTriggerMs < COOLDOWN_MS) return
+
+        // Engine guard: block triggers if license is not activated
+        if (!com.camlauncher.app.data.LicenseManager.isActivated(this)) {
+            Log.w(TAG, "onTriggerFired() blocked — license not activated")
+            return
+        }
+
         lastTriggerMs = now
 
         val currentState = RecordingService.stateFlow.value
